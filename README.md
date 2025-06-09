@@ -8,3 +8,9 @@ This repository contains a Google Apps Script used to set up a booking system in
 
 ## Syncing with Google Calendar
 Run the `syncBookingsToGoogleCalendar()` function to push all bookings to a calendar. The script prompts for a calendar ID and creates private events for each booking so that the calendar only shows that a time slot is booked without revealing details.
+
+# Belvedere-Booking
+
+## Booking Form
+
+Run the `setupBookingForm` function from `BookingFormSetup.js` to create a Google Form for room bookings. Submissions will be validated and stored in the `Bookings` sheet.
