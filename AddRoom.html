@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    h1 { color: #3f51b5; margin-top: 0; }
+    label { display: block; margin-top: 10px; }
+    input, textarea, select { width: 100%; padding: 6px; box-sizing: border-box; }
+    button { margin-top: 15px; padding: 10px 20px; background-color: #3f51b5; color: white; border: none; cursor: pointer; }
+    button:hover { background-color: #303f9f; }
+  </style>
+</head>
+<body>
+  <h1>Add Room</h1>
+  <form id="roomForm">
+    <label for="buildingId">Building ID</label>
+    <input type="text" id="buildingId" name="buildingId" required>
+
+    <label for="roomName">Room Name</label>
+    <input type="text" id="roomName" name="roomName" required>
+
+    <label for="roomNumber">Room Number</label>
+    <input type="text" id="roomNumber" name="roomNumber">
+
+    <label for="description">Description</label>
+    <textarea id="description" name="description"></textarea>
+
+    <label for="roomType">Room Type</label>
+    <input type="text" id="roomType" name="roomType">
+
+    <label for="capacity">Capacity</label>
+    <input type="number" id="capacity" name="capacity">
+
+    <label for="floor">Floor</label>
+    <input type="number" id="floor" name="floor">
+
+    <label for="squareFootage">Square Footage</label>
+    <input type="number" id="squareFootage" name="squareFootage">
+
+    <label for="amenities">Amenities</label>
+    <input type="text" id="amenities" name="amenities">
+
+    <label for="hourlyRate">Hourly Rate</label>
+    <input type="number" id="hourlyRate" name="hourlyRate" step="0.01">
+
+    <label for="dailyRate">Daily Rate</label>
+    <input type="number" id="dailyRate" name="dailyRate" step="0.01">
+
+    <label for="imageUrl">Image URL</label>
+    <input type="text" id="imageUrl" name="imageUrl">
+
+    <button type="button" onclick="submitForm()">Add Room</button>
+  </form>
+
+  <script>
+    function submitForm() {
+      const data = Object.fromEntries(new FormData(document.getElementById('roomForm')).entries());
+      google.script.run.withSuccessHandler(function(){ google.script.host.close(); })
+        .processAddRoomForm(data);
+    }
+  </script>
+</body>
+</html>
