@@ -339,6 +339,73 @@ function isTimeSlotAvailable(resourceId, resourceType, startDate, endDate, start
   
   return true; // No overlap
 }
+// Sync all bookings in the "Bookings" sheet to a Google Calendar
+function syncBookingsToGoogleCalendar() {
+  const ui = SpreadsheetApp.getUi();
+
+  // Prompt the user for the calendar ID
+  const response = ui.prompt('Enter the Google Calendar ID to sync bookings to:');
+  if (response.getSelectedButton() !== ui.Button.OK) {
+    ui.alert('Calendar sync cancelled.');
+    return;
+  }
+
+  const calendarId = response.getResponseText().trim();
+  if (!calendarId) {
+    ui.alert('No Calendar ID provided.');
+    return;
+  }
+
+  const calendar = CalendarApp.getCalendarById(calendarId);
+  if (!calendar) {
+    ui.alert('Unable to find a calendar with the provided ID.');
+    return;
+  }
+
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Bookings');
+  if (!sheet) {
+    ui.alert('Bookings sheet not found.');
+    return;
+  }
+
+  const data = sheet.getDataRange().getValues();
+  const headers = data[0];
+
+  const startDateIdx = headers.indexOf('Start Date');
+  const endDateIdx = headers.indexOf('End Date');
+  const startTimeIdx = headers.indexOf('Start Time');
+  const endTimeIdx = headers.indexOf('End Time');
+  const bookingTypeIdx = headers.indexOf('Booking Type');
+  const resourceIdIdx = headers.indexOf('Resource ID');
+
+  for (let i = 1; i < data.length; i++) {
+    const startDate = new Date(data[i][startDateIdx]);
+    const endDate = new Date(data[i][endDateIdx]);
+
+    // Apply time information if provided
+    const startTime = data[i][startTimeIdx];
+    if (startTime) {
+      const [h, m] = startTime.split(':');
+      startDate.setHours(parseInt(h, 10), parseInt(m, 10));
+    }
+
+    const endTime = data[i][endTimeIdx];
+    if (endTime) {
+      const [h, m] = endTime.split(':');
+      endDate.setHours(parseInt(h, 10), parseInt(m, 10));
+    }
+
+    const title = 'Booked - ' + data[i][bookingTypeIdx] + ' ' + data[i][resourceIdIdx];
+
+    // Create the calendar event as private so details are hidden
+    calendar.createEvent(title, startDate, endDate, {
+      visibility: CalendarApp.Visibility.PRIVATE
+    });
+  }
+
+  ui.alert('Bookings have been synced to the calendar.');
+}
+
 
 /** UI Helpers to add new data via dialogs */
 function showAddPropertyDialog() {
