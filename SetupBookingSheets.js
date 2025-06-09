@@ -339,3 +339,88 @@ function isTimeSlotAvailable(resourceId, resourceType, startDate, endDate, start
   
   return true; // No overlap
 }
+
+/** UI Helpers to add new data via dialogs */
+function showAddPropertyDialog() {
+  const html = HtmlService.createHtmlOutputFromFile('AddProperty')
+    .setWidth(400)
+    .setHeight(600);
+  SpreadsheetApp.getUi().showModalDialog(html, 'Add Property');
+}
+
+function processAddPropertyForm(form) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Properties');
+  const row = [
+    generateId('PROP'),
+    form.propertyName,
+    form.description,
+    form.address,
+    form.contactEmail,
+    form.contactPhone,
+    form.checkIn,
+    form.checkOut,
+    form.timeZone,
+    'Active',
+    new Date(),
+    new Date(),
+    form.imageUrl || ''
+  ];
+  sheet.appendRow(row);
+}
+
+function showAddBuildingDialog() {
+  const html = HtmlService.createHtmlOutputFromFile('AddBuilding')
+    .setWidth(400)
+    .setHeight(650);
+  SpreadsheetApp.getUi().showModalDialog(html, 'Add Building');
+}
+
+function processAddBuildingForm(form) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Buildings');
+  const row = [
+    generateId('BLDG'),
+    form.propertyId,
+    form.buildingName,
+    form.description,
+    form.buildingType,
+    form.capacity,
+    form.floorCount,
+    form.amenities,
+    form.bookingType,
+    'Active',
+    new Date(),
+    new Date(),
+    form.imageUrl || ''
+  ];
+  sheet.appendRow(row);
+}
+
+function showAddRoomDialog() {
+  const html = HtmlService.createHtmlOutputFromFile('AddRoom')
+    .setWidth(400)
+    .setHeight(700);
+  SpreadsheetApp.getUi().showModalDialog(html, 'Add Room');
+}
+
+function processAddRoomForm(form) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Rooms');
+  const row = [
+    generateId('ROOM'),
+    form.buildingId,
+    form.roomName,
+    form.roomNumber,
+    form.description,
+    form.roomType,
+    form.capacity,
+    form.floor,
+    form.squareFootage,
+    form.amenities,
+    form.hourlyRate,
+    form.dailyRate,
+    'Active',
+    new Date(),
+    new Date(),
+    form.imageUrl || ''
+  ];
+  sheet.appendRow(row);
+}
