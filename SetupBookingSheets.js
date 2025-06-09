@@ -55,7 +55,8 @@ function createPropertiesSheet(spreadsheet) {
     'Time Zone',
     'Status',
     'Created Date',
-    'Modified Date'
+    'Modified Date',
+    'Image URL'
   ];
   
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
@@ -68,7 +69,7 @@ function createPropertiesSheet(spreadsheet) {
   
   // Add sample data
   const sampleData = [
-    ['PROP001', 'Mountain Retreat Center', 'A peaceful retreat center in the mountains', '123 Mountain View Rd', 'admin@mountainretreat.com', '555-0123', '15:00', '11:00', 'America/New_York', 'Active', new Date(), new Date()]
+    ['PROP001', 'Mountain Retreat Center', 'A peaceful retreat center in the mountains', '123 Mountain View Rd', 'admin@mountainretreat.com', '555-0123', '15:00', '11:00', 'America/New_York', 'Active', new Date(), new Date(), 'https://example.com/property.jpg']
   ];
   
   sheet.getRange(2, 1, sampleData.length, sampleData[0].length).setValues(sampleData);
@@ -95,7 +96,8 @@ function createBuildingsSheet(spreadsheet) {
     'Booking Type', // 'whole_building' or 'individual_rooms'
     'Status',
     'Created Date',
-    'Modified Date'
+    'Modified Date',
+    'Image URL'
   ];
   
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
@@ -108,9 +110,9 @@ function createBuildingsSheet(spreadsheet) {
   
   // Add sample data
   const sampleData = [
-    ['BLDG001', 'PROP001', 'The Barn', 'Rustic barn for events and gatherings', 'Event Hall', 100, 1, 'Kitchen, Sound System, Projector', 'whole_building', 'Active', new Date(), new Date()],
-    ['BLDG002', 'PROP001', 'Community Center', 'Multi-purpose building with individual rooms', 'Multi-Purpose', 200, 2, 'Kitchen, WiFi, Parking', 'individual_rooms', 'Active', new Date(), new Date()],
-    ['BLDG003', 'PROP001', 'Guest Lodge', 'Accommodation building', 'Lodging', 50, 2, 'WiFi, Laundry, Common Room', 'individual_rooms', 'Active', new Date(), new Date()]
+    ['BLDG001', 'PROP001', 'The Barn', 'Rustic barn for events and gatherings', 'Event Hall', 100, 1, 'Kitchen, Sound System, Projector', 'whole_building', 'Active', new Date(), new Date(), 'https://example.com/barn.jpg'],
+    ['BLDG002', 'PROP001', 'Community Center', 'Multi-purpose building with individual rooms', 'Multi-Purpose', 200, 2, 'Kitchen, WiFi, Parking', 'individual_rooms', 'Active', new Date(), new Date(), 'https://example.com/community-center.jpg'],
+    ['BLDG003', 'PROP001', 'Guest Lodge', 'Accommodation building', 'Lodging', 50, 2, 'WiFi, Laundry, Common Room', 'individual_rooms', 'Active', new Date(), new Date(), 'https://example.com/guest-lodge.jpg']
   ];
   
   sheet.getRange(2, 1, sampleData.length, sampleData[0].length).setValues(sampleData);
@@ -138,7 +140,8 @@ function createRoomsSheet(spreadsheet) {
     'Daily Rate',
     'Status',
     'Created Date',
-    'Modified Date'
+    'Modified Date',
+    'Image URL'
   ];
   
   sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
@@ -151,11 +154,11 @@ function createRoomsSheet(spreadsheet) {
   
   // Add sample data
   const sampleData = [
-    ['ROOM001', 'BLDG002', 'Room A', 'A', 'Small meeting room', 'Meeting Room', 8, 1, 200, 'Whiteboard, TV', 25, 200, 'Active', new Date(), new Date()],
-    ['ROOM002', 'BLDG002', 'Room B', 'B', 'Medium conference room', 'Conference Room', 15, 1, 350, 'Projector, Conference Phone', 40, 320, 'Active', new Date(), new Date()],
-    ['ROOM003', 'BLDG002', 'Room G', 'G', 'Large event space', 'Event Space', 50, 2, 800, 'Sound System, Stage, Kitchen Access', 75, 600, 'Active', new Date(), new Date()],
-    ['ROOM004', 'BLDG003', 'Suite 1', '101', 'Two-bedroom guest suite', 'Guest Suite', 4, 1, 600, 'Kitchenette, Private Bath', 0, 150, 'Active', new Date(), new Date()],
-    ['ROOM005', 'BLDG003', 'Suite 2', '102', 'One-bedroom guest suite', 'Guest Suite', 2, 1, 400, 'Kitchenette, Private Bath', 0, 120, 'Active', new Date(), new Date()]
+    ['ROOM001', 'BLDG002', 'Room A', 'A', 'Small meeting room', 'Meeting Room', 8, 1, 200, 'Whiteboard, TV', 25, 200, 'Active', new Date(), new Date(), 'https://example.com/room-a.jpg'],
+    ['ROOM002', 'BLDG002', 'Room B', 'B', 'Medium conference room', 'Conference Room', 15, 1, 350, 'Projector, Conference Phone', 40, 320, 'Active', new Date(), new Date(), 'https://example.com/room-b.jpg'],
+    ['ROOM003', 'BLDG002', 'Room G', 'G', 'Large event space', 'Event Space', 50, 2, 800, 'Sound System, Stage, Kitchen Access', 75, 600, 'Active', new Date(), new Date(), 'https://example.com/room-g.jpg'],
+    ['ROOM004', 'BLDG003', 'Suite 1', '101', 'Two-bedroom guest suite', 'Guest Suite', 4, 1, 600, 'Kitchenette, Private Bath', 0, 150, 'Active', new Date(), new Date(), 'https://example.com/suite1.jpg'],
+    ['ROOM005', 'BLDG003', 'Suite 2', '102', 'One-bedroom guest suite', 'Guest Suite', 2, 1, 400, 'Kitchenette, Private Bath', 0, 120, 'Active', new Date(), new Date(), 'https://example.com/suite2.jpg']
   ];
   
   sheet.getRange(2, 1, sampleData.length, sampleData[0].length).setValues(sampleData);
